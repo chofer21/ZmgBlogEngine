@@ -26,7 +26,6 @@ namespace ZmgBlogEngine.Endpoints.Controllers
 		[Route("comment")]
 		public void PostComment(CommentDto commentDto)
 		{
-			commentDto.UserId = 1; // TOdo add this with session
 			_publicService.AddComment(commentDto);
 		}
 

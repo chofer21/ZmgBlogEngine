@@ -37,6 +37,7 @@ namespace ZmgBlogEngine.DataAccess.Repositories
                     .Where(x => x.Status == status.ToString())
                     .Include(x => x.User)
                     .Include(x => x.Comments)
+                    .ThenInclude(x => x.User)
                     .ToList();
         }
 

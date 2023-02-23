@@ -9,6 +9,5 @@
         public int RolId { get; set; }
 
         public virtual RolDto Rol { get; set; } = null!;
-        public string? Password { get; set; }
     }
 }

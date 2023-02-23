@@ -17,7 +17,6 @@ namespace ZmgBlogEngine.Services
 			_mapper = mapper;
 		}
 
-		// TODO session author
 		public IEnumerable<PostDto> GetWriterPosts(int authorId)
 		{
 			var posts = _postRepository.GetPostsByAuthor(authorId);
@@ -25,14 +24,12 @@ namespace ZmgBlogEngine.Services
 			return _mapper.Map<List<PostDto>>(posts);
 		}
 
-		// TODO session author
 		public IEnumerable<PostDto> GetWriterPostsToUpdate(int authorId)
 		{
 			var posts = _postRepository.GetPostsByAuthorAndToUpdate(authorId);
 			return _mapper.Map<List<PostDto>>(posts);
 		}
 
-		// TODO session author
 		public void AddPost(PostDto postDto)
 		{
 			var newPost = new Post
@@ -48,7 +45,6 @@ namespace ZmgBlogEngine.Services
 			_postRepository.Save();
 		}
 
-		// TODO session author
 		public void EditPost(PostDto postDto)
 		{
 			if (postDto.Id != null && IsPostValidForEdit(postDto.Id.Value))
@@ -68,7 +64,6 @@ namespace ZmgBlogEngine.Services
 			}
 		}
 
-		// TODO session author
 		public void SubmitPost(int postId)
 		{
 			if (IsPostValidForEdit(postId))

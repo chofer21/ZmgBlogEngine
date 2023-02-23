@@ -10,7 +10,7 @@
 
         public string Content { get; set; } = null!;
 
-        public string Status { get; set; } = null!;
+        public string? Status { get; set; } = null!;
 
         public int UserId { get; set; }
 

@@ -52,6 +52,7 @@ namespace ZmgBlogEngine.Endpoints.Controllers
 
             var token = new JwtSecurityToken(
                     audience: "http://localhost:5087",
+                    issuer: "dotnet-user-jwts",
                     claims: claims,
                     expires: DateTime.Now.AddHours(1),
                     signingCredentials: credentials

@@ -8,6 +8,7 @@ namespace ZmgBlogEngine.Endpoints.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(Roles = "Editor")]
     public class EditorController : ControllerBase
     {
         IEditorService _editorService;
@@ -35,10 +36,8 @@ namespace ZmgBlogEngine.Endpoints.Controllers
         [Route("reject")]
         public void RejectPost(PostRejectedDto postDto)
         {
-            postDto.EditorId = 2; // Todo session
             _editorService.RejectPost(postDto);
         }
     }
 
 }
-

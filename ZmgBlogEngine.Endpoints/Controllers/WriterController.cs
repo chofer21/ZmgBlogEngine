@@ -8,6 +8,7 @@ namespace ZmgBlogEngine.Endpoints.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(Roles = "Writer")]
     public class WriterController : ControllerBase
     {
         IWriterService _writerService;
@@ -19,25 +20,22 @@ namespace ZmgBlogEngine.Endpoints.Controllers
 
         [HttpGet]
         [Route("posts")]
-        public IEnumerable<PostDto> GetWriterPosts()
+        public IEnumerable<PostDto> GetWriterPosts(int writerId)
         {
-            var authorId = 1; // Todo hacer esto por session
-            return _writerService.GetWriterPosts(authorId);
+            return _writerService.GetWriterPosts(writerId);
         }
 
         [HttpGet]
         [Route("postsToUpdate")]
-        public IEnumerable<PostDto> GetWriterPostsToUpdate()
+        public IEnumerable<PostDto> GetWriterPostsToUpdate(int writerId)
         {
-            var authorId = 1; // Todo hacer esto por session
-            return _writerService.GetWriterPostsToUpdate(authorId);
+            return _writerService.GetWriterPostsToUpdate(writerId);
         }
 
         [HttpPost]
         [Route("post")]
         public void AddPost(PostDto postDto)
         {
-            postDto.UserId = 1; // TOdo add this with session
             _writerService.AddPost(postDto);
         }
 
@@ -45,7 +43,6 @@ namespace ZmgBlogEngine.Endpoints.Controllers
         [Route("post")]
         public void UpdatePost(PostDto postDto)
         {
-            postDto.UserId = 1; // TOdo add this with session
             _writerService.EditPost(postDto);
         }
 

@@ -17,7 +17,6 @@ namespace ZmgBlogEngine.Services
 			_mapper = mapper;
 		}
 
-		// TODO session editor
 		public IEnumerable<PostDto> GetPendingPosts()
 		{
 			var posts = _postRepository.GetPostsByStatus(Status.PendingApproval);
@@ -25,24 +24,22 @@ namespace ZmgBlogEngine.Services
             return _mapper.Map<List<PostDto>>(posts);
         }
 
-		// TODO session editor
 		public void ApprovePost(int postId)
 		{
 			var post = _postRepository.GetPostByID(postId);
 
-			if (IsPostValidForReview(post))
+			if (IsPostValidForReview(post!))
 			{
 				_postRepository.UpdatePostStatus(postId, Status.Published);
 				_postRepository.Save();
 			}
 		}
 
-		// TODO session editor
 		public void RejectPost(PostRejectedDto postDto)
 		{
 			var post = _postRepository.GetPostByID(postDto.Id);
 
-			if (IsPostValidForReview(post))
+			if (IsPostValidForReview(post!))
 			{
 				var postToEdit = new Post
 				{

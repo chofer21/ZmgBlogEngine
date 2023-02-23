@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Shared;
 using ZmgBlogEngine.DataAccess.Models;
 
@@ -34,6 +35,8 @@ namespace ZmgBlogEngine.DataAccess.Repositories
             return _context
                     .Posts
                     .Where(x => x.Status == status.ToString())
+                    .Include(x => x.User)
+                    .Include(x => x.Comments)
                     .ToList();
         }
 

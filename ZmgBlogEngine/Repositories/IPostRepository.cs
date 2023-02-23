@@ -9,7 +9,7 @@ namespace ZmgBlogEngine.DataAccess.Repositories
         IEnumerable<Post> GetPostsByAuthor(int authorId);
         IEnumerable<Post> GetPostsByStatus(Status status);
         IEnumerable<Post> GetPostsByAuthorAndStatus(int authorId, Status status);
-        IEnumerable<Post> GetPostsByAuthorAndNotPublished(int authorId);
+        IEnumerable<Post> GetPostsByAuthorAndToUpdate(int authorId);
         Post? GetPostByID(int postId);
         void InsertPost(Post post);
         void DeletePost(int postId);

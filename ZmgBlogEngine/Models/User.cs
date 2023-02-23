@@ -13,7 +13,9 @@ public partial class User
 
     public virtual ICollection<Comment> Comments { get; } = new List<Comment>();
 
-    public virtual ICollection<Post> Posts { get; } = new List<Post>();
+    public virtual ICollection<Post> PostEditors { get; } = new List<Post>();
+
+    public virtual ICollection<Post> PostUsers { get; } = new List<Post>();
 
     public virtual Rol Rol { get; set; } = null!;
 }

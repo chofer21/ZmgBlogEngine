@@ -17,7 +17,13 @@ public partial class Post
 
     public int UserId { get; set; }
 
+    public string? RejectedReason { get; set; }
+
+    public int? EditorId { get; set; }
+
     public virtual ICollection<Comment> Comments { get; } = new List<Comment>();
+
+    public virtual User? Editor { get; set; }
 
     public virtual User User { get; set; } = null!;
 }

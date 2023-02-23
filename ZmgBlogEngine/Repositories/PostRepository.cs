@@ -1,4 +1,5 @@
 ﻿using System;
+using Shared;
 using ZmgBlogEngine.DataAccess.Models;
 
 namespace ZmgBlogEngine.DataAccess.Repositories
@@ -18,6 +19,40 @@ namespace ZmgBlogEngine.DataAccess.Repositories
         public IEnumerable<Post> GetPosts()
         {
             return _context.Posts.ToList();
+        }
+
+        public IEnumerable<Post> GetPostsByAuthor(int authorId)
+        {
+            return _context
+                    .Posts
+                    .Where(x => x.UserId == authorId)
+                    .ToList();
+        }
+
+        public IEnumerable<Post> GetPostsByStatus(Status status)
+        {
+            return _context
+                    .Posts
+                    .Where(x => x.Status == status.ToString())
+                    .ToList();
+        }
+
+        public IEnumerable<Post> GetPostsByAuthorAndStatus(int authorId, Status status)
+        {
+            return _context
+                    .Posts
+                    .Where(x => x.UserId == authorId && x.Status == status.ToString())
+                    .ToList();
+        }
+
+        public IEnumerable<Post> GetPostsByAuthorAndToUpdate(int authorId)
+        {
+            return _context
+                    .Posts
+                    .Where(x => x.UserId == authorId &&
+                                x.Status != Status.Published.ToString() &&
+                                x.Status != Status.PendingApproval.ToString())
+                    .ToList();
         }
 
         public Post? GetPostByID(int postId)
@@ -46,7 +81,18 @@ namespace ZmgBlogEngine.DataAccess.Repositories
             {
                 item.Title = post.Title;
                 item.Content = post.Content;
-                item.Status = item.Status;
+                item.Status = post.Status;
+                item.EditorId = post.EditorId;
+                item.RejectedReason = post.RejectedReason;
+            }
+        }
+
+        public void UpdatePostStatus(int postId, Status status)
+        {
+            var item = _context.Posts.Find(postId);
+            if (item != null)
+            {
+                item.Status = status.ToString();
             }
         }
 

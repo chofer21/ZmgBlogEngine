@@ -33,7 +33,6 @@ public partial class ZmgDbContext : DbContext
         {
             entity.ToTable("Comment");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Content).HasColumnType("text");
             entity.Property(e => e.Date).HasColumnType("datetime");
 
@@ -52,9 +51,9 @@ public partial class ZmgDbContext : DbContext
         {
             entity.ToTable("Post");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Content).HasColumnType("text");
             entity.Property(e => e.Date).HasColumnType("datetime");
+            entity.Property(e => e.RejectedReason).HasColumnType("text");
             entity.Property(e => e.Status)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -62,7 +61,11 @@ public partial class ZmgDbContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            entity.HasOne(d => d.User).WithMany(p => p.Posts)
+            entity.HasOne(d => d.Editor).WithMany(p => p.PostEditors)
+                .HasForeignKey(d => d.EditorId)
+                .HasConstraintName("FK_Post_Editor");
+
+            entity.HasOne(d => d.User).WithMany(p => p.PostUsers)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Post_User");
@@ -74,7 +77,6 @@ public partial class ZmgDbContext : DbContext
 
             entity.ToTable("Rol");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -84,7 +86,6 @@ public partial class ZmgDbContext : DbContext
         {
             entity.ToTable("User");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsUnicode(false);

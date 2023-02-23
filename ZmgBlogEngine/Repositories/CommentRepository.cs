@@ -1,4 +1,5 @@
 ﻿using System;
+using Shared;
 using ZmgBlogEngine.DataAccess.Models;
 
 namespace ZmgBlogEngine.DataAccess.Repositories
@@ -27,7 +28,16 @@ namespace ZmgBlogEngine.DataAccess.Repositories
 
         public void InsertComment(Comment comment)
         {
-            _context.Comments.Add(comment);
+            var post = _context.Posts.Find(comment.PostId);
+
+            if (post != null && post.Status == Status.Published.ToString())
+            {
+                _context.Comments.Add(comment);
+            }
+            else
+            {
+                throw new Exception("Post not valid for new comment");
+            }
         }
 
         public void DeleteComment(int commentId)

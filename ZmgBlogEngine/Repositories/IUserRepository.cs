@@ -6,6 +6,7 @@ namespace ZmgBlogEngine.DataAccess.Repositories
 	{
         IEnumerable<User> GetUsers();
         User? GetUserByID(int userId);
+        User? GetUserByIdAndPassword(int userId, string password);
         void InsertUser(User user);
         void DeleteUser(int userId);
         void UpdateUser(User user);

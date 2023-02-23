@@ -89,6 +89,9 @@ public partial class ZmgDbContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.Password)
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             entity.HasOne(d => d.Rol).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RolId)

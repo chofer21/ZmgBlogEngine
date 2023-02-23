@@ -21,8 +21,8 @@ namespace ZmgBlogEngine.Services
 		{
 			var posts = _postRepository.GetPostsByStatus(Status.PendingApproval);
 
-            return _mapper.Map<List<PostDto>>(posts);
-        }
+			return _mapper.Map<List<PostDto>>(posts);
+		}
 
 		public void ApprovePost(int postId)
 		{

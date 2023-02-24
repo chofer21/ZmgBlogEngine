@@ -7,6 +7,7 @@ using ZmgBlogEngine.DataAccess.Repositories;
 using ZmgBlogEngine.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +22,13 @@ builder.Services
     .AddTransient<ILoginService, LoginService>()
     .AddTransient<IPostRepository, PostRepository>()
     .AddTransient<ICommentRepository, CommentRepository>()
-    .AddTransient<IUserRepository, UserRepository>()
-    .AddTransient<ZmgDbContext, ZmgDbContext>();
+    .AddTransient<IUserRepository, UserRepository>();
+
+builder.Services.AddDbContext<ZmgDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetSection("ConnectionString").Value!);
+    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+});
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

@@ -11,7 +11,8 @@ const Public = () => {
         userId = 5; // public
     }
 
-    const BaseURL = "http://localhost:5087";
+    //const BaseURL = "http://localhost:5087";
+    const BaseURL = "https://zmgblogengine-webapi.azurewebsites.net";
 
     const [posts, setPosts] = useState([]);
 

@@ -91,6 +91,8 @@ namespace ZmgBlogEngine.DataAccess.Repositories
                 item.Status = post.Status;
                 item.EditorId = post.EditorId;
                 item.RejectedReason = post.RejectedReason;
+
+                _context.Update(item);
             }
         }
 
@@ -100,6 +102,7 @@ namespace ZmgBlogEngine.DataAccess.Repositories
             if (item != null)
             {
                 item.Status = status.ToString();
+                _context.Update(item);
             }
         }
 

@@ -6,7 +6,8 @@ const Editor = () => {
 
     var userId = localStorage.getItem("userId");
     var token = localStorage.getItem("token");
-    const BaseURL = "http://localhost:5087";
+    //const BaseURL = "http://localhost:5087";
+    const BaseURL = "https://zmgblogengine-webapi.azurewebsites.net";
 
     const [posts, setPosts] = useState([]);
     const [info, setInfo] = useState();
@@ -60,9 +61,12 @@ const Editor = () => {
         .catch(err => {
             console.log(err);
             setInfo("unathorized")
-        });
+        })
+        .finally(() =>{
 
-        // refreshPage();
+            refreshPage();
+        }
+        );
     }
 
     function Reject(reason, postIdClicked) {
@@ -76,8 +80,12 @@ const Editor = () => {
             body: JSON.stringify({ content: reason, id: postIdClicked, editorId: userId })
         };
         fetch(BaseURL + '/editor/reject', requestOptions)
+        .finally(() =>{
 
-        //refreshPage();
+            refreshPage();
+        }
+        );
+
     }
 
     function refreshPage() {

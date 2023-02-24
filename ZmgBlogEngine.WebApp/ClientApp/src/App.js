@@ -7,8 +7,6 @@ import Login from "./Login"
 
 function App() {
 
-    const BaseURL = "http://localhost:5087";
-
   return (
     <div className="App">
     <div className="container">

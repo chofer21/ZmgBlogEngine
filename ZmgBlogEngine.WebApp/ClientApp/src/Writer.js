@@ -6,7 +6,8 @@ const Writer = () => {
 
     var userId = localStorage.getItem("userId");
     var token = localStorage.getItem("token");
-    const BaseURL = "http://localhost:5087";
+    //const BaseURL = "http://localhost:5087";
+    const BaseURL = "https://zmgblogengine-webapi.azurewebsites.net";
 
     const [posts, setPosts] = useState([]);
     const [info, setInfo] = useState();
@@ -63,8 +64,11 @@ const Writer = () => {
             body: JSON.stringify({ title: title, content: content, userId: userId })
         };
         fetch(BaseURL + '/writer/post', requestOptions)
+        .finally(() =>{
 
-       // refreshPage();
+            refreshPage();
+        }
+        );
     }
 
     function Submit(postIdClicked)
@@ -78,9 +82,12 @@ const Writer = () => {
         .catch(err => {
             console.log(err);
             setInfo("unathorized")
-        });
+        })
+        .finally(() =>{
 
-        // refreshPage();
+            refreshPage();
+        }
+        );
     }
 
     function refreshPage() {
@@ -102,7 +109,7 @@ const Writer = () => {
             </div>
             <div class="form-group">
                 <br />
-            <button onClick={() => handleNewClick()} className="btn btn-primary">Login</button>
+            <button onClick={() => handleNewClick()} className="btn btn-primary">Add Post</button>
             </div>
 <hr/>
             <div className="row">

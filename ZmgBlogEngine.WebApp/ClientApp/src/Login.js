@@ -3,7 +3,8 @@ import { useState } from "react"
 
 function Login() {
 
-    const BaseURL = "http://localhost:5087";
+    //const BaseURL = "http://localhost:5087";
+    const BaseURL = "https://zmgblogengine-webapi.azurewebsites.net";
 
     const [info, setInfo] = useState();
 

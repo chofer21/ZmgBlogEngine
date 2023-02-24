@@ -26,7 +26,7 @@ builder.Services
 
 builder.Services.AddDbContext<ZmgDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetSection("ConnectionString").Value!);
+    options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings:ZmgBlogEngineDb").Value!);
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 

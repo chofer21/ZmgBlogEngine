@@ -1,77 +1,56 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import { useEffect, useState } from "react"
-
-const App = () => {
-
-    const [posts, setPosts] = useState([]);
-
-    const loadPosts = async () => {
-        const response = await fetch("http://localhost:5087/public/posts");
-
-        if (response.ok)
-        {
-            const data = await response.json();
-            setPosts(data);
-        }
-    }
-
-    useEffect(() => {
-        loadPosts();
-        console.log('posts');
-        console.log(posts);
-    }, [])
+import { Routes, Route } from "react-router-dom"
+import Public from "./Public"
+import Writer from "./Writer"
+import Editor from "./Editor"
+import Login from "./Login"
 
 
-    return (
-        <div className="container">
-            <h3 class="display-3">ZMG Blog Posts</h3>
-            <br />
+function App() {
 
-            <div className="container">
-                <div className="row">
-                {
-                    posts.map(
-                        (item) => (
-                            <div className="col-md-6">
-                                <div id={item.id} className="card">
-                                    <div className="card-header text-bg-dark ">
-                                        <span className="h3">{item.title}</span>
-                                        <span className="opacity-50"> - By {item.user.name}</span>
-                                    </div>
-                                <div class="card-body">
-                                    <p class="card-text">{item.content}</p>
-                                </div>
-                                <div className="card-footer">
-                                    <h5>Comments</h5>
-                                        <ul className="list-group list-group-flush">
-                                    {
-                                            item.comments.map(
-                                                (com) => (
-                                                    <div>
-                                                        <li className="list-group-item">
-                                                            {com.content}
-                                                            <span className="opacity-50"> - By {com.user.name}</span>
-                                                        </li>
-                                                    </div>
-                                                )
-                                            )
-                                    }
-                                    </ul>
-                                </div>
-                            </div>
+    const BaseURL = "http://localhost:5087";
 
-                                <br />
-                                <br />
-                            </div>
-                        )
-                    )
-                }
-                </div>
-            </div>
-        </div>
-    )
+  return (
+    <div className="App">
+    <div className="container">
+        <h3 class="display-3">ZMG Blog Posts</h3>
+        <br />
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/">Public</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/writer">Writer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/editor">Editor</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br/>
 
+      <Routes>
+        <Route path="/" element={ <Public/> } />
+        <Route path="login" element={ <Login/> } />
+        <Route path="writer" element={ <Writer/> } />
+        <Route path="editor" element={ <Editor/> } />
+      </Routes>
+    </div>
+    </div>
+  )
 }
 
-export default App;
+export default App

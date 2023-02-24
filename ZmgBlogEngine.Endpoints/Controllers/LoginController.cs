@@ -33,7 +33,7 @@ namespace ZmgBlogEngine.Endpoints.Controllers
                 return CreateToken(user);
             }
 
-            return String.Empty;
+            return "Invalid";
         }
 
         private string CreateToken(UserDto userDto)

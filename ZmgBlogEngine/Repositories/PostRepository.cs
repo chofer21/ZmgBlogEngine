@@ -27,6 +27,9 @@ namespace ZmgBlogEngine.DataAccess.Repositories
             return _context
                     .Posts
                     .Where(x => x.UserId == authorId)
+                    .Include(x => x.User)
+                    .Include(x => x.Comments)
+                    .ThenInclude(x => x.User)
                     .ToList();
         }
 

@@ -6,7 +6,7 @@ const Public = () => {
 
     var userId = localStorage.getItem("userId");
 
-    if (userId == "")
+    if (userId == "" || userId == null)
     {
         userId = 5; // public
     }
@@ -46,8 +46,11 @@ const Public = () => {
             body: JSON.stringify({ content: commentToAdd, postId: postIdClicked, userId: userId })
         };
         fetch(BaseURL + '/public/comment', requestOptions)
+        .finally(() =>{
 
-        refreshPage();
+            refreshPage();
+        }
+        );
     }
 
     function refreshPage() {

@@ -77,7 +77,7 @@ const Editor = () => {
                 'Authorization': 'bearer '+ token,    
                 'Content-Type': 'application/json'
              },
-            body: JSON.stringify({ content: reason, id: postIdClicked, editorId: userId })
+            body: JSON.stringify({ rejectedReason: reason, id: postIdClicked, editorId: userId })
         };
         fetch(BaseURL + '/editor/reject', requestOptions)
         .finally(() =>{

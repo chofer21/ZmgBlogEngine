@@ -124,8 +124,14 @@ const Writer = () => {
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text">{item.content}</p>
+                                        <span class="badge badge-pill badge-primary">Primary</span>
+
                                     </div>
                                     <div className="card-footer">
+                                        <span class="badge bg-primary">{item.status}</span> 
+                                        <br /><br />
+
+
                                         <h5>Actions</h5>
                                         <ul className="list-group list-group-flush">
                                             <div>
